@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal OS Runtime</title>
+</head>
+<body>
+    <h1>Universal OS REPL</h1>
+    <textarea id="command" rows="4" cols="50" placeholder="Enter command here"></textarea><br>
+    <button id="execute">Execute</button>
+    <pre id="output"></pre>
+
+    <script type="module">
+        import init, { Runtime } from './pkg/universal_os_runtime.js';
+
+        async function main() {
+            await init();
+            const runtime = new Runtime();
+
+            document.getElementById('execute').addEventListener('click', () => {
+                const command = document.getElementById('command').value;
+                const result = runtime.execute(command);
+                document.getElementById('output').textContent = result;
+            });
+        }
+
+        main();
+    </script>
+</body>
+</html>
